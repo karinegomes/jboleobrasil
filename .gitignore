@@ -1,0 +1,11 @@
+/.idea
+/docs
+/vendor
+/storage/docs
+/storage/contracts
+/storage/relatorios
+/public/index.html
+deploy.sh
+Homestead.yaml
+Homestead.json
+.env
