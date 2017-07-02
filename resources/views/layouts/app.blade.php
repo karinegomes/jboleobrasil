@@ -123,11 +123,11 @@
                                                     Documentos</a></li>
                                             <li><a href="{{url('/carrier')}}"><i class="fa fa-caret-right"></i>
                                                     Operadoras</a></li>
-                                            <li>
+                                            {{--<li>
                                                 <a href="{{ url('periodo-cobranca') }}">
                                                     <i class="fa fa-caret-right"></i> Períodos de cobrança
                                                 </a>
-                                            </li>
+                                            </li>--}}
                                         </ul>
                                     </li>
                                 @endif

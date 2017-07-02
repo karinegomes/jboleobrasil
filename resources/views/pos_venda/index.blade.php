@@ -30,28 +30,14 @@
                         Filtrar
                     </a>
 
-                    <a href="#controle-comissao-panel" data-toggle="collapse" class="btn btn-default">
+                    {{--<a href="#controle-comissao-panel" data-toggle="collapse" class="btn btn-default">
                         Controle de comissão
-                    </a>
+                    </a>--}}
 
                     <a href="#resumo-pagtos-panel" data-toggle="collapse" class="btn btn-default">Resumo de pagamentos</a>
                 </div>
                 <!-- /tile header -->
                 <div class="tile-widget" style="padding: 0">
-                    {{--<div class="row">
-                        <div class="col-sm-12">
-                            <a href="#search-panel" data-toggle="collapse" class="btn btn-default">
-                                Filtrar
-                            </a>
-
-                            <a href="#controle-comissao-panel" data-toggle="collapse" class="btn btn-default">
-                                Controle de comissão
-                            </a>
-
-                            <a href="#resumo-pagtos-panel" data-toggle="collapse" class="btn btn-default">Resumo de pagamentos</a>
-                        </div>
-                    </div>--}}
-
                     @include('pos_venda.includes.panel_filtrar')
 
                     @include('pos_venda.includes.panel_resumo_pagamentos')
@@ -74,17 +60,6 @@
                         :embarqueSelecionado="embarqueSelecionado">
                     </comissao-grid>
                 </div>
-
-                <!-- tile body -->
-                {{--<div class="tile-body p-0">
-                    <demo-grid
-                            :data="gridData"
-                            :selected.sync="selected"
-                            :columns="gridColumns"
-                            :filter-key="searchQuery">
-                    </demo-grid>
-                </div>--}}
-                <!-- /tile body -->
 
             </section>
             <!-- /tile -->

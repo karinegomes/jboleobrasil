@@ -45,9 +45,9 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-default">Filtrar</button>
-            <a role="button" data-toggle="modal" data-target="#modal-cobranca-periodo" class="btn btn-default">
+            {{--<a role="button" data-toggle="modal" data-target="#modal-cobranca-periodo" class="btn btn-default">
                 Salvar cobrança do período
-            </a>
+            </a>--}}
         </form>
     </div>
 </div>
