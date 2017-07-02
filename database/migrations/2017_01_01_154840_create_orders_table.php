@@ -31,7 +31,7 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('client_id')->references('id')->on('companies');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('item_id')->references('id')->on('items');
             $table->foreign('freight_id')->references('id')->on('freights');

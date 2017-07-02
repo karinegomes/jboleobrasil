@@ -159,10 +159,7 @@
                 { key: 'vencimentoNF', label: 'Vencimento NF' },
                 { key: 'comissao', label: 'Comissão' },
                 { key: 'valorPago', label: 'Valor pago'},
-                { key: 'agroSD', label: 'AgroSD' },
-                { key: 'silas', label: 'Silas' },
-                { key: 'dayane', label: 'Dayane' },
-                { key: 'observacao', label: 'Obs' },
+                { key: 'observacao', label: 'Obs' }
             ],
             embarqueSelecionado: null
         },

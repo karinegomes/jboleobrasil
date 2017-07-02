@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta id="token" name="token" content="{{ csrf_token() }}">
 
-    <title>@yield('entity-label', 'Dashboard') - AgroSD</title>
+    <title>@yield('entity-label', 'Dashboard') - JBOleoBrasil</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
@@ -26,7 +26,7 @@
         <!-- Branding -->
         <div class="branding scheme-black">
             <a href="{{ url('/') }}" class="brand">
-                <span><strong>Agro</strong>SD</span>
+                <span><strong>JB</strong>OleoBrasil</span>
             </a>
             <a href="#" class="offcanvas-toggle visible-xs-inline"><i class="fa fa-bars"></i></a>
         </div>

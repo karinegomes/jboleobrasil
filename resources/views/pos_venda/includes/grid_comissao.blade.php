@@ -1,4 +1,4 @@
-<script type="text/x-template" id="grid-comissao">
+<script type="text/x-template" id="grid-comissao" xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="col-md-3 columns left-column p-0">
         <section class="h-50 bb-color2">
             <ul class="nav nav-pills nav-stacked">
@@ -12,9 +12,6 @@
             <div class="title-info">Informações</div>
             <div class="body-info" v-if="info">
                 <p>Total em cobrança: R$ @{{ info.cobranca }}</p>
-                <p>AgroSD: R$ @{{ info.agroSD }}</p>
-                <p>Silas: R$ @{{ info.silas }}</p>
-                <p>Dayane: R$ @{{ info.dayane }}</p>
                 <p>Total pago: R$ @{{ info.pago }}</p>
             </div>
         </section>

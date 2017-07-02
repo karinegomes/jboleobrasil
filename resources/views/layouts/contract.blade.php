@@ -77,7 +77,7 @@
     <tbody>
     <tr>
         <td style="width: 15%">
-            <img src="{{ asset('img/logo.jpg') }}" style="display:block; width:100%"/>
+            <img src="{{ asset('img/logo.png') }}" style="display:block; width:100%"/>
         </td>
         <td colspan="3" style="width: 85%">
             <div style="background-color:#fabf8f;margin:8px 0;color:#fff;text-align:center;padding:3px;">
@@ -243,8 +243,7 @@
         <td colspan="4" style="font-size: 14px">
             {{--<hr style="margin:10px 0px;border:none;">--}}
             Atenciosamente,<br>
-            Dayane / Silas<br>
-            Telefone: 11 3678 0066
+            JBOleoBrasil
         </td>
     </tr>
     </tbody>

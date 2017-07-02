@@ -223,9 +223,6 @@ class Embarque extends Model
             $_embarque['vencimentoNF']        = $embarque->data_pagamento ? Carbon::createFromFormat('Y-m-d', $embarque->data_pagamento)->format('d/m/Y') : null;
             $_embarque['comissao']            = $embarque->getComissaoFormatadoByCliente($idEmpresa);
             $_embarque['observacao']          = $embarque->baixa ? $embarque->baixa->observacao : null;
-            $_embarque['agroSD']              = $embarque->baixa && $embarque->baixa->agrosd ? 'R$ ' . number_format($embarque->baixa->agrosd, 2, ',', '.') : null;
-            $_embarque['silas']               = $embarque->baixa && $embarque->baixa->silas ? 'R$ ' . number_format($embarque->baixa->silas, 2, ',', '.') : null;
-            $_embarque['dayane']              = $embarque->baixa && $embarque->baixa->dayane ? 'R$ ' . number_format($embarque->baixa->dayane, 2, ',', '.') : null;
             $_embarque['idCliente']           = $idEmpresa;
             $_embarque['id']                  = $embarque->id;
             $_embarque['status']              = $embarque->status;
@@ -312,27 +309,18 @@ class Embarque extends Model
 
         $embarques = Embarque::embarquesAtivosFiltro($inicio, $fim);
         $cobranca = 0;
-        $agrosd = 0;
-        $silas = 0;
-        $dayane = 0;
         $pago = 0;
 
         foreach ($embarques as $embarque) {
             $cobranca += $embarque->getValorCobranca();
 
             if($embarque->baixa) {
-                $agrosd += $embarque->baixa->agrosd ? $embarque->baixa->agrosd : 0;
-                $silas  += $embarque->baixa->silas ? $embarque->baixa->silas : 0;
-                $dayane += $embarque->baixa->dayane ? $embarque->baixa->dayane : 0;
                 $pago   += $embarque->baixa->valor;
             }
         }
 
         $data = [
             'cobranca' => number_format($cobranca, 2, ',', '.'),
-            'agroSD'   => number_format($agrosd, 2, ',', '.'),
-            'silas'    => number_format($silas, 2, ',', '.'),
-            'dayane'   => number_format($dayane, 2, ',', '.'),
             'pago'     => number_format($pago, 2, ',', '.')
         ];
 

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container w-420 p-15 bg-white mt-40 text-center">
-  <img src="{{asset('img/logo.jpg')}}" alt="Logotipo" />
+  <img src="{{asset('img/logo.png')}}" alt="Logo JB Oleo Brasil" width="100%"/>
   <form class="form-validation mt-20" role="form" method="POST" action="{{ url('/login') }}">
     {{ csrf_field() }}
     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

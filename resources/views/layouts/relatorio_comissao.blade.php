@@ -86,7 +86,7 @@
                 </h1>
             </td>
             <td style="text-align: right">
-                <img src="{{ asset('img/logo.jpg') }}" style="width: 120px">
+                <img src="{{ asset('img/logo.png') }}" style="width: 120px">
             </td>
         </tr>
     </table>

@@ -18,27 +18,6 @@
 </div>
 
 <div class="form-group">
-    <label class="col-sm-3 control-label">AgroSD</label>
-    <div class="col-sm-9">
-        <input type="text" id="agrosd" class="form-control" name="agrosd" value="{{ old('agrosd', $edit ? $baixa->agrosd : '') }}">
-    </div>
-</div>
-
-<div class="form-group">
-    <label class="col-sm-3 control-label">Silas</label>
-    <div class="col-sm-9">
-        <input type="text" id="silas" class="form-control" name="silas" value="{{ old('silas', $edit ? $baixa->silas : '') }}">
-    </div>
-</div>
-
-<div class="form-group">
-    <label class="col-sm-3 control-label">Dayane</label>
-    <div class="col-sm-9">
-        <input type="text" id="dayane" class="form-control" name="dayane" value="{{ old('dayane', $edit ? $baixa->dayane : '') }}">
-    </div>
-</div>
-
-<div class="form-group">
     <label class="col-sm-3 control-label">Observação</label>
     <div class="col-sm-9">
         <input type="text" class="form-control" name="observacao" value="{{ old('observacao', $edit ? $baixa->observacao : '') }}">

@@ -12,9 +12,9 @@ class CreateAddressTable extends Migration
      */
     public function up()
     {
-        Schema::create('address', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome', 150)->nullable();
+            $table->string('name', 150)->nullable();
             $table->string('number', 10)->nullable();
             $table->string('complemento', 45)->nullable();
             $table->string('bairro', 100)->nullable();
@@ -33,6 +33,6 @@ class CreateAddressTable extends Migration
      */
     public function down()
     {
-        Schema::drop('address');
+        Schema::drop('addresses');
     }
 }

@@ -31,14 +31,6 @@
                             <td><input type="text" class="form-control" value="R$ {{ number_format($baixa->embarque->getValorCobranca(), 2, ',', '.') }}" readonly></td>
                             <th>Valor pago</th>
                             <td><input type="text" class="form-control" value="R$ {{ number_format($baixa->valor, 2, ',', '.') }}" readonly></td>
-                            <th>AgroSD</th>
-                            <td><input type="text" class="form-control" value="{{ $baixa->agrosd ? 'R$ ' . number_format($baixa->agrosd, 2, ',', '.') : '--' }}" readonly></td>
-                        </tr>
-                        <tr>
-                            <th>Silas</th>
-                            <td><input type="text" class="form-control" value="{{ $baixa->silas ? 'R$ ' . number_format($baixa->silas, 2, ',', '.') : '--' }}" readonly></td>
-                            <th>Dayane</th>
-                            <td><input type="text" class="form-control" value="{{ $baixa->dayane ? 'R$ ' . number_format($baixa->dayane, 2, ',', '.') : '--' }}" readonly></td>
                             <th>Observação</th>
                             <td><input type="text" class="form-control" value="{{ $baixa->observacao }}" readonly></td>
                         </tr>

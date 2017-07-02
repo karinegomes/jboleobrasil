@@ -18,9 +18,6 @@ class CreateBaixasTable extends Migration
             $table->integer('company_id')->unsigned();
             $table->date('data_pagamento');
             $table->decimal('valor');
-            $table->decimal('agrosd')->nullable();
-            $table->decimal('silas')->nullable();
-            $table->decimal('dayane')->nullable();
             $table->string('observacao')->nullable();
             $table->timestamps();
 
