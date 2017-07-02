@@ -31,7 +31,7 @@ class CreateCompaniesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('address_id')->references('id')->on('address');
+            $table->foreign('address_id')->references('id')->on('addresses');
             $table->foreign('group_id')->references('id')->on('groups');
         });
     }
