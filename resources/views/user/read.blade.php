@@ -35,14 +35,14 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">Telefone</label>
             <div class="col-sm-10">
-              <p class="form-control-static">({{ $user->phone_ddd }}) {{ $user->phone }}</p>
+              <p class="form-control-static">{{ $user->phone_ddd ? '('.$user->phone_ddd.') ' : '' }}{{ $user->phone }}</p>
             </div>
           </div>
           <hr class="line-dashed line-full"/>
           <div class="form-group">
             <label class="col-sm-2 control-label">Telefone Celular</label>
             <div class="col-sm-10">
-              <p class="form-control-static">({{ $user->mobile_ddd }}) {{ $user->mobile_phone }}</p>
+              <p class="form-control-static">{{ $user->mobile_ddd ? '('.$user->mobile_ddd.') ' : '' }}{{ $user->mobile_phone }}</p>
             </div>
           </div>
           <hr class="line-dashed line-full"/>

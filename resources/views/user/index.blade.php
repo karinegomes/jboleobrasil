@@ -63,8 +63,12 @@ new Vue({
     gridColumns: [
       { key: 'name', label: 'Nome'},
       { key: 'email', label: 'Email'},
-      { key: entry => `(${entry.phone_ddd}) ${entry.phone}`, label: 'Telefone'},
-      { key: entry => `(${entry.mobile_ddd}) ${entry.mobile_phone}`, label: 'Celular'},
+      { key: entry => {
+          return (entry.phone_ddd ? '('+entry.phone_ddd+') ' : '') + (entry.phone ? entry.phone : '');
+      }, label: 'Telefone' },
+      { key: entry => {
+          return (entry.mobile_ddd ? '('+entry.mobile_ddd+') ' : '') + (entry.phone ? entry.mobile_phone : '');
+      }, label: 'Celular'},
       { key: 'skype', label: 'Skype'}
     ]
   },
