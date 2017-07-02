@@ -24,7 +24,7 @@ class StoreUserRequest extends Request
   public function rules(){
     return [
       'name' => 'required|max:255',
-      'password' => 'required|digits_between:6,15',
+      'password' => 'required|between:6,15',
       'email' => 'bail|required|email|max:255|unique:users',
       'signature' => 'file|image',
     ];
