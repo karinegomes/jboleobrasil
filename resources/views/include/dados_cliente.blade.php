@@ -16,11 +16,11 @@
                 <input type="text" class="form-control" value="{{ $company->address->name }}, {{ $company->address->number }} {{ $company->address->complemento != '' ? ' - ' . $company->address->complemento : '' }} - {{ $company->address->bairro }}" readonly>
             </td>
             <th scope="row">Cidade</th>
-            <td colspan="3"><input type="text" class="form-control" value="{{ $company->address->city->name }}" readonly></td>
+            <td colspan="3"><input type="text" class="form-control" value="{{ $company->address->city_id ? $company->address->city->name : '' }}" readonly></td>
         </tr>
         <tr>
             <th scope="row">Estado</th>
-            <td><input type="text" class="form-control" value="{{ $company->address->city->state->name }}" readonly></td>
+            <td><input type="text" class="form-control" value="{{ $company->address->city_id ? $company->address->city->state->name : '' }}" readonly></td>
             <th scope="row">CEP</th>
             <td><input type="text" class="form-control" value="{{ $company->address->cep_formatado }}" readonly></td>
             <th scope="row">Caixa postal</th>
