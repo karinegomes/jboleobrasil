@@ -181,8 +181,13 @@ class Order extends Model
     {
         $days = $this->paymethods()->get(['days'])->pluck(['days'])->toArray();
         $complemento = $this->paymethods->last()->name;
+        $dias = ' dia ';
 
-        return implode(', ', $days) . ' dias ' . $complemento;
+        if (array_sum($days) > 1) {
+            $dias = ' dias ';
+        }
+
+        return implode(', ', $days) . $dias . $complemento;
     }
 
     public static function boot()

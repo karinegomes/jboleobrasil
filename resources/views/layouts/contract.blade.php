@@ -80,7 +80,7 @@
             <img src="{{ asset('img/logo.png') }}" style="display:block; width:100%"/>
         </td>
         <td colspan="3" style="width: 85%">
-            <div style="background-color:#fabf8f;margin:8px 0;color:#fff;text-align:center;padding:3px;">
+            <div style="background-color:#02954e;margin:8px 0;color:#fff;text-align:center;padding:3px;">
                 <strong style="font-size:24px;">Contrato {{ $order->reference_code }}</strong>
             </div>
         </td>
@@ -224,9 +224,20 @@
 
     <tr>
         <td colspan="4" style="border:1px solid #CCCCCC; padding: 5px 15px;" class="observacoes">
-            <span>- Qualquer discrepância retornar imediatamente, pela mesma via no prazo de 24hs;</span><br/>
-            <span>- Operação por conta e risco dos contratantes;</span><br/>
-            <span>- Será considerado normal quebra de peso 0,25% para mais ou para menos não havendo desconto nas duplicatas.</span><br/>
+            *** ENVIAR LAUDO DE ANÁLISE ANEXO A NOTA FISCAL.<br>
+            QUALQUER DISCREPÂNCIA RETORNAR IMEDIATAMENTE, PELA MESMA VIA
+            NO PRAZO DE 24 H. DO RECEBIMENTO DESTE CONTRATO.<br>
+            VENDA FOB RESPONSABILIDADE PELO TRANSPORTE E TRÂNSITO DA
+            MERCADORIA DO COMPRADOR.<br>
+            SERÁ CONSIDERADO COMO NORMAL QUEBRA DE PESO DE ATÉ 0,25% PARA
+            MAIS OU PARA MENOS, SEM QUE HAJA DESCONTO OU ACRÉSCIMO NAS
+            DUPLICATAS. A QUEBRA DE PESO COM PERCENTUAL ACIMA DE 0,25%
+            SOFRERÁ ÁGIO OU DESAGIO NAS DUPLICATAS DAS DIFERENÇAS.<br>
+            <br>
+            GRATO POR MAIS ESSE NEGÓCIO.<br>
+            <br>
+            JABER Fone: (11) 2206-0343 E-Mail: jaber@jboleobrasil.com.br
+
         </td>
     </tr>
     <tr style="text-align:center;text-transform:uppercase;">
