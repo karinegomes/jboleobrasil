@@ -1,10 +1,10 @@
 <div class="form-group condicao-pagamento-wrapper" data-count="{{ $count }}">
     <label for="cond" class="col-sm-2 control-label">Condição de Pagamento</label>
     <div class="col-sm-3">
-        <div class="input-group">
-            <input class="form-control dias-pagamento" name="paymethod[{{ $count }}][days]" style="width: 45px;"
-                   value="{{ $days }}">
-            <span class="input-group-addon">dias</span>
+        <div class="col-sm-4 p-0">
+            <input class="form-control dias-pagamento" name="paymethod[{{ $count }}][days]" value="{{ $days }}">
+        </div>
+        <div class="col-sm-8 p-0">
             <input class="form-control pagamento-comp" name="paymethod[{{ $count }}][name]" value="{{ $name }}">
         </div>
     </div>

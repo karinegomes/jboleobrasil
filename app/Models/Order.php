@@ -179,7 +179,7 @@ class Order extends Model
      */
     public function condicoesPagamentoFormatado()
     {
-        $days = $this->paymethods()->get(['days'])->pluck(['days'])->toArray();
+        /*$days = $this->paymethods()->get(['days'])->pluck(['days'])->toArray();
         $complemento = $this->paymethods->last()->name;
         $dias = ' dia ';
 
@@ -187,7 +187,17 @@ class Order extends Model
             $dias = ' dias ';
         }
 
-        return implode(', ', $days) . $dias . $complemento;
+        return implode(', ', $days) . $dias . $complemento;*/
+
+        $condicoesPagamento = [];
+
+        foreach ($this->paymethods as $paymethod) {
+            $text = $paymethod->days . ' ' . $paymethod->name;
+
+            array_push($condicoesPagamento, $text);
+        }
+
+        return implode(', ', $condicoesPagamento);
     }
 
     public static function boot()
