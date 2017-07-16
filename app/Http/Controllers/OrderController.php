@@ -266,14 +266,9 @@ class OrderController extends Controller
             return back()->withErrors('O contrato é inválido.');
         }
 
-        $bla[0] = [
-            'entrega' => 1,
-            'nf' => '222',
-            'qtde' => '10.000',
-            'data_embarque' => '10/01/2017'
-        ];
+        $embarques = $contrato->recuperarEmbarquesJSON();
 
-        return view('order.resumo')->with('bla', $bla)->with('contrato', $contrato);
+        return view('order.resumo', compact('contrato', 'embarques'));
     }
 
     public function cancelarPedidoAjax($id)

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\StringUtils;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -198,6 +199,30 @@ class Order extends Model
         }
 
         return implode(', ', $condicoesPagamento);
+    }
+
+    public function recuperarEmbarquesJSON()
+    {
+        $embarques = [];
+
+        foreach ($this->embarques as $_embarque) {
+            $embarque = [
+                'id'                           => $_embarque->id,
+                'entrega'                      => $_embarque->entrega,
+                'nota_fiscal'                  => $_embarque->nota_fiscal,
+                'quantidade'                   => StringUtils::formatarNumeroBrasileiro($_embarque->quantidade),
+                'data_embarque'                => $_embarque->data_embarque ? Carbon::createFromFormat('Y-m-d', $_embarque->data_embarque)->format('d/m/Y') : null,
+                'saldo'                        => StringUtils::formatarNumeroBrasileiro($_embarque->saldo),
+                'observacao'                   => $_embarque->observacao,
+                'data_pagamento'               => $_embarque->data_pagamento ? Carbon::createFromFormat('Y-m-d', $_embarque->data_pagamento)->format('d/m/Y') : null,
+                'comissao_vendedor_formatado'  => $_embarque->comissao_vendedor_formatado,
+                'comissao_comprador_formatado' => $_embarque->comissao_comprador_formatado,
+            ];
+
+            array_push($embarques, $embarque);
+        }
+
+        return json_encode($embarques);
     }
 
     public static function boot()

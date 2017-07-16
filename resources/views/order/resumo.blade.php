@@ -124,35 +124,15 @@
             selected: null,
             showModal: false,
             searchQuery: '',
-            gridData: JSON.parse('{!! $contrato->embarques !!}'),
+            gridData: JSON.parse('{!! $embarques !!}'),
             gridColumns: [
                 { key: 'entrega', label: 'Entrega' },
                 { key: 'nota_fiscal', label: 'Nota Fiscal' },
-                { key: entry => {
-                    return Number(entry.quantidade).toLocaleString();
-                }, label: 'Quantidade' },
-                { key: entry => {
-                    if(entry.data_embarque != null) {
-                        const date = entry.data_embarque + ' 00:00:00';
-
-                        return (new Date(date)).toLocaleDateString();
-                    }
-
-                    return null;
-                }, label: 'Data Embarque' },
-                { key: entry => {
-                    return Number(entry.saldo.toFixed(1)).toLocaleString();
-                }, label: 'Saldo' },
+                { key: 'quantidade', label: 'Quantidade' },
+                { key: 'data_embarque', label: 'Data Embarque' },
+                { key: 'saldo', label: 'Saldo' },
                 { key: 'observacao', label: 'Observação' },
-                { key: entry => {
-                    if(entry.data_pagamento != null) {
-                        const date = entry.data_pagamento + ' 00:00:00';
-
-                        return (new Date(date)).toLocaleDateString();
-                    }
-
-                    return null;
-                }, label: 'Data Pagto. Mercadoria' },
+                { key: 'data_pagamento', label: 'Data Pagto. Mercadoria' },
                 { key: 'comissao_vendedor_formatado', label: 'Comissão Vendedor' },
                 { key: 'comissao_comprador_formatado', label: 'Comissão Comprador' }
             ]
