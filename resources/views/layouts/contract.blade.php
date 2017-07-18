@@ -223,22 +223,7 @@
     </tr>
 
     <tr>
-        <td colspan="4" style="border:1px solid #CCCCCC; padding: 5px 15px;" class="observacoes">
-            *** ENVIAR LAUDO DE ANÁLISE ANEXO A NOTA FISCAL.<br>
-            QUALQUER DISCREPÂNCIA RETORNAR IMEDIATAMENTE, PELA MESMA VIA
-            NO PRAZO DE 24 H. DO RECEBIMENTO DESTE CONTRATO.<br>
-            VENDA {{ $order->freight->incoterm->name }} RESPONSABILIDADE PELO TRANSPORTE E TRÂNSITO DA
-            MERCADORIA DO {{ strtolower($order->freight->incoterm->name) == 'cif' ? 'VENDEDOR' : 'COMPRADOR' }}.<br>
-            SERÁ CONSIDERADO COMO NORMAL QUEBRA DE PESO DE ATÉ 0,25% PARA
-            MAIS OU PARA MENOS, SEM QUE HAJA DESCONTO OU ACRÉSCIMO NAS
-            DUPLICATAS. A QUEBRA DE PESO COM PERCENTUAL ACIMA DE 0,25%
-            SOFRERÁ ÁGIO OU DESAGIO NAS DUPLICATAS DAS DIFERENÇAS.<br>
-            <br>
-            GRATO POR MAIS ESSE NEGÓCIO.<br>
-            <br>
-            JABER Fone: (11) 2206-0343 E-Mail: jaber@jboleobrasil.com.br
-
-        </td>
+        <td colspan="4" style="border:1px solid #CCCCCC; padding: 5px 15px;" class="observacoes">{!! nl2br($order->observation) !!}</td>
     </tr>
     <tr style="text-align:center;text-transform:uppercase;">
         <td colspan="2" style="color:#77923c;padding:5px;">

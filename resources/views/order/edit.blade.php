@@ -285,7 +285,7 @@
           <div class="form-group">
             <label for="obs" class="col-sm-2 control-label">Observação</label>
             <div class="col-sm-10">
-              <textarea id="obs" rows="8" class="form-control" name="order[observation]">{{ old('order.observation', $order->observation) }}</textarea>
+              <textarea id="obs" rows="8" class="form-control" name="order[observation]">{!! old('order.observation', $order->observation) !!}</textarea>
             </div>
           </div>
           <hr class="line-dashed line-full"/>
