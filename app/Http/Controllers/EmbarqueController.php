@@ -75,7 +75,7 @@ class EmbarqueController extends Controller
             return back()->withErrors(config('constants.ERRO_PADRAO'));
         }
 
-        $request['quantidade'] = str_replace('.', '', $request['quantidade']);
+        //$request['quantidade'] = str_replace('.', '', $request['quantidade']);
 
         $data = StringUtils::setNullWhenEmptyArray($request->except('_token', 'status', 'desconto'));
         $data['contrato_id'] = $contrato->id;

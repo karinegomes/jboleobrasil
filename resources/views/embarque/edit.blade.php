@@ -50,7 +50,7 @@
                                 <div class="form-group">
                                     <label for="quantidade" class="col-sm-3 control-label">Quantidade</label>
                                     <div class="col-sm-3">
-                                        <input type="text" name="quantidade" class="form-control" value="{{ old('quantidade', $embarque->quantidade) }}" id="quantidade">
+                                        <input type="text" name="quantidade" class="form-control" value="{{ old('quantidade', number_format($embarque->quantidade, 2)) }}" id="quantidade">
                                     </div>
 
                                     <div class="col-sm-2">
