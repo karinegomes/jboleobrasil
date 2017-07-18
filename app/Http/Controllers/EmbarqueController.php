@@ -136,24 +136,24 @@ class EmbarqueController extends Controller
 
     public function update($id, EmbarqueRequest $request)
     {
+        $input = $request->all();
         $embarque = Embarque::find($id);
 
         if(!$embarque) {
             return back()->withErrors(config('constants.ERRO_PADRAO'));
         }
 
-        $request['quantidade'] = str_replace('.', '', $request['quantidade']);
-        $request['data_embarque'] = Carbon::createFromFormat('d/m/Y', $request['data_embarque'])->format('Y-m-d');
-        $request['data_pagamento'] = Carbon::createFromFormat('d/m/Y', $request['data_pagamento'])->format('Y-m-d');
+        $input['data_embarque'] = Carbon::createFromFormat('d/m/Y', $input['data_embarque'])->format('Y-m-d');
+        $input['data_pagamento'] = Carbon::createFromFormat('d/m/Y', $input['data_pagamento'])->format('Y-m-d');
 
-        $data = StringUtils::setNullWhenEmptyArray($request->except('_token', 'status', 'saldo', 'desconto'));
-        $dataDesconto = $request['desconto'];
+        $data = StringUtils::setNullWhenEmptyArray($input);
+        $dataDesconto = $input['desconto'];
 
         try {
             $embarque->update($data);
 
             $embarque->contrato->update([
-                'status' => $request['status']
+                'status' => $input['status']
             ]);
 
             $embarque->descontos()->delete();
@@ -167,7 +167,7 @@ class EmbarqueController extends Controller
             }
         }
         catch (Exception $e) {
-            Log::alert($e->getMessage());
+            Log::debug($e);
 
             return back()->withErrors(config('constants.ERRO_PADRAO'));
         }

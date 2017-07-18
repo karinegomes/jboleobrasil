@@ -1,4 +1,5 @@
-<script type="text/x-template" id="grid-template">
+<script type="text/x-template" id="grid-template" xmlns:v-on="http://www.w3.org/1999/xhtml"
+        xmlns:v-el="http://www.w3.org/1999/xhtml">
     <div class="col-md-3 pt-15 pb-15 columns left-column">
         <ul class="nav nav-pills nav-stacked">
             <li role="presentation" class="active"><a>Clientes</a></li>

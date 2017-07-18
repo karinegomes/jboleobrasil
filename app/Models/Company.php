@@ -177,7 +177,7 @@ class Company extends Model
             $value->min_date = $inicio;
             $value->max_date = $fim;
 
-            $contratosVenda = $value->sells()->whereIn('status', ['ativo', 'encerrado'])->get();
+            $contratosVenda = $value->sells()->whereIn('status', ['ativo', 'encerrado', 'liquidado'])->get();
 
             $contratosVenda = $contratosVenda->filter(function ($value) use ($inicio, $fim) {
                 $embarques = $value->embarques()->whereBetween('data_pagamento', [$inicio, $fim])->get()

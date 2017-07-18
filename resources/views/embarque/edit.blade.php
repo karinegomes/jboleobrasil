@@ -153,7 +153,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#quantidade').mask("#.##0", {reverse: true});
+        $('#quantidade').mask("#.##0,00", {reverse: true});
         $('.desconto').mask("#.##0,00", {reverse: true});
 
         $(".date").datetimepicker({

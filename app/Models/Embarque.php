@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Embarque extends Model
 {
-    protected $guarded = ['id'];
+    protected $fillable = ['contrato_id', 'entrega', 'nota_fiscal', 'quantidade', 'data_embarque', 'data_pagamento', 'observacao', 'status'];
     protected $appends = ['saldo', 'comissao_vendedor', 'comissao_vendedor_formatado', 'comissao_comprador',
         'comissao_comprador_formatado', 'valor_unitario'];
 
@@ -186,7 +186,7 @@ class Embarque extends Model
         return Embarque::whereHas('contrato', function($query) use ($idEmpresa) {
             $query->where('client_id', $idEmpresa)
                 ->orWhere('seller_id', $idEmpresa)
-                ->whereIn('status', ['ativo', 'encerrado']);
+                ->whereIn('status', ['ativo', 'encerrado', 'liquidado']);
         })->whereBetween('data_pagamento', [$dataMin, $dataMax])->get()->filter(function ($embarque) use ($idEmpresa) {
             $eVendedor = $embarque->contrato->seller_id == $idEmpresa;
 
@@ -246,7 +246,7 @@ class Embarque extends Model
     {
         $embarques = Embarque::whereBetween('data_pagamento', [$dataMin, $dataMax])
             ->whereHas('contrato', function($query) use ($compradorId, $vendedorId) {
-                $query->whereIn('status', ['ativo', 'encerrado']);
+                $query->whereIn('status', ['ativo', 'encerrado', 'liquidado']);
 
                 if($compradorId != 'todos') {
                     $query->where('client_id', $compradorId);

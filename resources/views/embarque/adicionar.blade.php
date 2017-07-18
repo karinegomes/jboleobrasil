@@ -153,7 +153,7 @@
 <script type="text/javascript" src="{{ asset('js/mask/jquery.mask.js') }}"></script>
 
 <script type="text/javascript">
-    $('#quantidade').mask("#.##0", {reverse: true});
+    $('#quantidade').mask("#.##0,00", {reverse: true});
     $('.desconto').mask("#.##0,00", {reverse: true});
 
     $('.date').datetimepicker({

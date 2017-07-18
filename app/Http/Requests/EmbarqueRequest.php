@@ -48,6 +48,7 @@ class EmbarqueRequest extends Request
         $all = array_replace_recursive($this->input(), $this->allFiles());
 
         $all['quantidade'] = str_replace('.', '', $all['quantidade']);
+        $all['quantidade'] = str_replace(',', '.', $all['quantidade']);
 
         for($i = 0; $i < count($all['desconto']); $i++) {
             $all['desconto'][$i]['valor'] = str_replace(',', '.', str_replace('.', '', $all['desconto'][$i]['valor']));
