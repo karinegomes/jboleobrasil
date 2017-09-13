@@ -50,8 +50,7 @@ class PosVendaController extends Controller
 
         $embarques = Embarque::whereHas('contrato', function($query) use ($idEmpresa, $request) {
             $query->where('client_id', $idEmpresa)
-                ->orWhere('seller_id', $idEmpresa)
-                ->whereIn('status', ['ativo', 'encerrado']);
+                ->orWhere('seller_id', $idEmpresa);
         })->whereBetween('data_pagamento', [$minDate->format('Y-m-d'), $maxDate->format('Y-m-d')])->get()
             ->filter(function ($embarque) use ($idEmpresa) {
             $eVendedor = $embarque->contrato->seller_id == $idEmpresa;
