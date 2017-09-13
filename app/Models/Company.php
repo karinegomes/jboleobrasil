@@ -192,7 +192,7 @@ class Company extends Model
                 return true;
             }
 
-            $contratosCompra = $value->purchases()->whereIn('status', ['ativo', 'encerrado'])->get();
+            $contratosCompra = $value->purchases()->whereIn('status', ['ativo', 'encerrado', 'liquidado'])->get();
 
             $contratosCompra = $contratosCompra->filter(function ($value) use ($inicio, $fim) {
                 $embarques = $value->embarques()->whereBetween('data_pagamento', [$inicio, $fim])->get()
