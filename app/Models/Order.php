@@ -104,7 +104,7 @@ class Order extends Model
 
     public static function findByReference($code)
     {
-        return static::withTrashed()->where('reference_code', $code)->first();
+        return static::where('reference_code', $code)->first();
     }
 
     public function setSellDateAttribute($value)
