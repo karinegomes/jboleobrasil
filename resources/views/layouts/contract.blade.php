@@ -122,7 +122,7 @@
             <span>{{ $order->seller->name }}</span><br/>
             <span>ENDEREÇO: {{ $order->seller->address->name }}, {{ $order->seller->address->number }} - {{ $order->seller->address->bairro }}</span><br/>
             <span>CIDADE: {{ $order->seller->address->city->name }}</span><br/>
-            <span>CNPJ: {{ $order->seller->registry }}</span>
+            <span>{{ $order->seller->registry ? 'CNPJ' : 'CPF' }}: {{ $order->seller->registry ? $order->seller->registry : $order->seller->cpf }}</span>
         </td>
         <td colspan="1">
             <span>CEP: {{ $order->seller->address->cep_formatado }}</span><br/>
@@ -142,7 +142,7 @@
             <span>{{ $order->client->name }}</span><br/>
             <span>ENDEREÇO: {{ $order->client->address->name }}, {{ $order->client->address->number }} - {{ $order->client->address->bairro }}</span><br/>
             <span>CIDADE: {{ $order->client->address->city->name }}</span><br/>
-            <span>CNPJ: {{ $order->client->registry }}</span><br/>
+            <span>{{ $order->client->registry ? 'CNPJ' : 'CPF' }}: {{ $order->client->registry ? $order->client->registry : $order->client->cpf }}</span><br/>
             <span>INSCRIÇÃO: {{ $order->client->ie }}</span><br/>
         </td>
         <td colspan="1">
