@@ -104,6 +104,12 @@
                                             <span class="badge bg-lightred">{{count($appointments)}}</span>
                                         @endif
                                     </a></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-truck"></i>
+                                        <span>Motoristas</span>
+                                    </a>
+                                </li>
                                 @if(Auth::user()->isAdmin())
                                     <li><a href="{{url('/user')}}"><i class="fa fa-users"></i> Usuários</a></li>
                                     <li>
