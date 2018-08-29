@@ -19,10 +19,9 @@ class CreateDadosBancariosTable extends Migration
             $table->string('cpf_cnpj')->nullable();
             $table->string('agencia')->nullable();
             $table->string('conta')->nullable();
-            $table->integer('motorista_id')->unsigned();
+            $table->integer('entity_id')->unsigned();
+            $table->string('entity_type');
             $table->timestamps();
-
-            $table->foreign('motorista_id')->references('id')->on('motoristas');
         });
     }
 

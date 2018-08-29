@@ -28,6 +28,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::resource('embarques', 'EmbarqueController', ['only' => ['index', 'destroy']]);
         Route::resource('pos-venda', 'PosVendaController', ['only' => ['index']]);
         Route::resource('periodo-cobranca', 'PeriodoCobrancaController', ['only' => ['index', 'destroy']]);
+        Route::resource('motoristas', 'MotoristaController');
 
         Route::get('appointment/filter', 'AppointmentController@filter');
         Route::post('appointment/view_notification', 'AppointmentController@viewNotification');

@@ -26,6 +26,6 @@ class Motorista extends Model
 
     public function dadosBancarios()
     {
-        return $this->hasOne(DadosBancarios::class);
+        return $this->morphOne(DadosBancarios::class, 'entity');
     }
 }
