@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Document extends Model
 {
-  protected $guarded = ['id'];
+    protected $guarded = ['id'];
 
-  public function doctype(){
-    return $this->belongsTo('App\Models\Doctype');
-  }
+    public function doctype()
+    {
+        return $this->belongsTo('App\Models\Doctype');
+    }
 
-  public function company(){
-    return $this->belongsTo('App\Models\Company');
-  }
+    public function entity()
+    {
+        return $this->morphTo();
+    }
 }

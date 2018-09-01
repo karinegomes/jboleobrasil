@@ -18,9 +18,23 @@
             <div class="tile-widget">
                 <div class="row">
                     <div class="col-md-12">
-                        <button id="visualizar-motorista" class="btn btn-default" disabled>
+                        <a href="{{ route('motoristas.create') }}" id="adicionar-motorista" class="btn btn-default">
+                            <i class="fa fa-plus mr-5"></i> Adicionar
+                        </a>
+                        <button id="visualizar-motorista" class="btn btn-default motorista-btn" data-url="{{ route('motoristas.show', '__id__') }}" disabled>
                             <span class="fa fa-search"></span> Visualizar
                         </button>
+                        <button id="editar-motorista" class="btn btn-default motorista-btn" data-url="{{ route('motoristas.edit', '__id__') }}" disabled>
+                            <span class="fa fa-pencil"></span> Editar
+                        </button>
+                        <button class="btn btn-default motorista-del-btn" disabled>
+                            <span class="fa fa-times"></span> Apagar
+                        </button>
+
+                        <form method="POST" action="{{ route('motoristas.destroy', '__id__') }}" class="hidden form-excluir-motorista">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                        </form>
                     </div>
                 </div>
             </div>
@@ -39,18 +53,6 @@
                             <th>Tipo de caminhão</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        @foreach($motoristas as $motorista)
-                            <tr data-id="{{ $motorista->id }}">
-                                <td>{{ $motorista->nome }}</td>
-                                <td>{{ $motorista->cpf }}</td>
-                                <td>{{ $motorista->telefone }}</td>
-                                <td>{{ $motorista->celular }}</td>
-                                <td>{{ $motorista->placa }}</td>
-                                <td>{{ $motorista->tipoDeCaminhao ? $motorista->tipoDeCaminhao->nome : '' }}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -69,7 +71,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            var table = $('#compromissos').DataTable({
+            var table = $('#motoristas').DataTable({
                 "language": {
                     "lengthMenu": "Exibir _MENU_ resultados",
                     "zeroRecords": "Nenhum resultado encontrado.",
@@ -78,34 +80,61 @@
                     "info": "Exibindo de_START_ à _END_ (Total: _TOTAL_)",
                     "search": "Buscar:",
                     "paginate": {
-                        "first":      "Primeiro",
-                        "last":       "Último",
-                        "next":       "Próximo",
-                        "previous":   "Anterior"
+                        "previous": "«",
+                        "next": "»"
                     }
                 },
-                "bSortClasses": false
-            });
+                "ajax": {
+                    url: "/ajax/motoristas/table-data"
+                },
+                "bSortClasses": false,
+                "processing": true,
+                "serverSide": true,
+                "columns": [
+                    { "data": "nome" },
+                    { "data": "cpf" },
+                    { "data": "telefone" },
+                    { "data": "celular" },
+                    { "data": "placa" },
+                    { "data": "tipo_de_caminhao" }
+                ],
+                'fnRowCallback': function(nRow, aData, iDisplayIndex) {
+                    console.log(aData);
 
-            $('#compromissos tbody').on('click', 'tr', function() {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                    $('#visualizar-compromisso').prop('disabled', true);
+                    $(nRow).data('id', aData.id);
+
+                    $(nRow).on('click', function () {
+                        if ($(this).hasClass('selected')) {
+                            $(this).removeClass('selected');
+                            $('.motorista-btn, .motorista-del-btn').prop('disabled', true);
+                        }
+                        else {
+                            table.$('tr.selected').removeClass('selected')
+                            $(this).addClass('selected');
+                            $('.motorista-btn, .motorista-del-btn').removeAttr('disabled');
+                        }
+                    });
                 }
-                else {
-                    table.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                    $('#visualizar-compromisso').removeAttr('disabled');
+            });
+
+            $('.motorista-btn').on('click', function() {
+                var id = $('#motoristas .selected').data('id');
+                var url = $(this).data('url').replace('__id__', id);
+
+                window.location.href = url;
+            });
+
+            $('.motorista-del-btn').on('click', function () {
+                var result = confirm("Deseja realmente apagar esse registro?");
+
+                if (result) {
+                    var id = $('#motoristas .selected').data('id');
+                    var $form = $('.form-excluir-motorista');
+                    var url = $form.attr('action').replace('__id__', id);
+
+                    $form.attr('action', url).submit();
                 }
             });
-
-            $('#visualizar-compromisso').on('click', function() {
-                var id = $('#compromissos .selected').data('id');
-
-                window.location.href = APP_URL + '/appointment/' + id;
-            });
-
-            $('#data-inicial, #data-final').inputmask('d/m/y');
         });
     </script>
 @endpush

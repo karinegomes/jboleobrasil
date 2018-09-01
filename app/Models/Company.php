@@ -11,6 +11,9 @@ class Company extends Model
 {
     use SoftDeletes;
 
+    public $entityType = 'company';
+    public $showRoute = 'company.show';
+
     protected $guarded = ['id'];
 
     protected $appends = [
@@ -40,7 +43,7 @@ class Company extends Model
 
     public function documents()
     {
-        return $this->hasMany('App\Models\Document');
+        return $this->morphMany(Document::class, 'entity');
     }
 
     public function appointments()

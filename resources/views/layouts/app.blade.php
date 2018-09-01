@@ -105,7 +105,7 @@
                                         @endif
                                     </a></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('motoristas.index') }}">
                                         <i class="fa fa-truck"></i>
                                         <span>Motoristas</span>
                                     </a>
@@ -185,7 +185,7 @@
         @if(session('error'))
             <div class="alert alert-danger">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                {{ session('error') }}
+                {!! session('error') !!}
             </div>
         @endif
         @yield('content')

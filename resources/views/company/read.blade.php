@@ -49,10 +49,12 @@
                             </button>
                         </div>
                         <div class="col-sm-10">
-                            <form class="form-inline" action="{{ url('/document') }}" method="post"
+                            <form class="form-inline"
+                                  action="{{ route('companies.documents.store', $company) }}"
+                                  method="post"
                                   enctype="multipart/form-data">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" name="company_id" value="{{ $company->id }}">
+                                {{--<input type="hidden" name="company_id" value="{{ $company->id }}">--}}
 
                                 <div class="form-group">
                                     <label for="name">Nome</label>

@@ -21,14 +21,20 @@ Route::group(['middleware' => 'web'], function () {
         Route::resource('interaction', 'InteractionController');
         Route::resource('order', 'OrderController', ['except' => ['show']]);
         Route::resource('product', 'ProductController');
+
         Route::resource('company', 'CompanyController');
+        Route::post('companies/{company}/documents', 'DocumentController@store')->name('companies.documents.store');
+
         Route::resource('user', 'UserController', ['only' => ['edit', 'update']]);
-        Route::resource('document', 'DocumentController', ['only' => ['show', 'store', 'destroy']]);
+        Route::resource('document', 'DocumentController', ['only' => ['show', 'destroy']]);
         Route::resource('appointment', 'AppointmentController', ['only' => ['index', 'store', 'destroy', 'show', 'update']]);
         Route::resource('embarques', 'EmbarqueController', ['only' => ['index', 'destroy']]);
         Route::resource('pos-venda', 'PosVendaController', ['only' => ['index']]);
         Route::resource('periodo-cobranca', 'PeriodoCobrancaController', ['only' => ['index', 'destroy']]);
-        Route::resource('motoristas', 'MotoristaController');
+
+        Route::resource('motoristas', 'MotoristaController', ['parameters' => ['motoristas' => 'motorista']]);
+        Route::get('ajax/motoristas/table-data', 'MotoristaController@tableData');
+        Route::post('motoristas/{motorista}/documents', 'DocumentController@store')->name('motoristas.documents.store');
 
         Route::get('appointment/filter', 'AppointmentController@filter');
         Route::post('appointment/view_notification', 'AppointmentController@viewNotification');

@@ -3,9 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Motorista extends Model
 {
+    use SoftDeletes;
+
+    public $entityType = 'motorista';
+    public $showRoute = 'motoristas.show';
+
     protected $table = 'motoristas';
 
     protected $fillable = [
@@ -27,5 +33,10 @@ class Motorista extends Model
     public function dadosBancarios()
     {
         return $this->morphOne(DadosBancarios::class, 'entity');
+    }
+
+    public function documents()
+    {
+        return $this->morphMany(Document::class, 'entity');
     }
 }

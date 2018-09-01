@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDocumentRequest;
 
+use App\Models\Company;
 use Auth;
 use App\Models\Document;
 use App\Http\Requests;
@@ -14,64 +15,66 @@ class DocumentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDocumentRequest $request)
+    public function store(StoreDocumentRequest $request, $entity)
     {
-      try {
-        $docArr = $request->except('file', '_token');
-        $path = storage_path("docs/company_{$docArr['company_id']}/");
+        try {
+            $docArr = $request->except('file', '_token');
+            $path = storage_path('docs/'.$entity->entityType.'_'.$entity->id.'/');
 
-        if($request->hasFile('file')){
-          $file = $request->file('file');
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
 
-          $docArr['filename'] = $file->getClientOriginalName();
-          $docArr['mimetype'] = $file->getMimeType();
+                $docArr['filename'] = $file->getClientOriginalName();
+                $docArr['mimetype'] = $file->getMimeType();
 
-          $file->move($path, $docArr['filename']);
+                $file->move($path, $docArr['filename']);
+            }
+
+            $document = $entity->documents()->create($docArr);
+
+            return redirect(route($entity->showRoute, $entity));
+        } catch (\Exception $e) {
+            return back();
         }
-
-        $document = Document::create($docArr);
-
-        return redirect('company/'.$document->company_id);
-      } catch (\Exception $e) {
-        return back();
-      }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-      $document = Document::findOrFail($id);
-      $path = storage_path("docs/company_{$document->company_id}/{$document->filename}");
+        $document = Document::findOrFail($id);
+        $entity = $document->entity;
+        $path = storage_path("docs/".$entity->entityType."_{$entity->id}/{$document->filename}");
 
-      return response()->file($path, [
-              'Content-Type' => $document->mimetype,
-              'Content-Disposition' => 'inline; filename="'.$document->filename.'"'
-            ]);
+        return response()->file($path, [
+            'Content-Type' => $document->mimetype,
+            'Content-Disposition' => 'inline; filename="' . $document->filename . '"'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-      $document = Document::findOrFail($id);
-      $path = storage_path("docs/company_{$document->company_id}/{$document->filename}");
+        $document = Document::findOrFail($id);
+        $entity = $document->entity;
+        $path = storage_path("docs/".$entity->entityType."_{$entity->id}/{$document->filename}");
 
-      if($document->delete() && unlink($path)){
-        return 'Ok';
-      } else {
-        return abort(500);
-      }
+        if ($document->delete() && unlink($path)) {
+            return 'Ok';
+        } else {
+            return abort(500);
+        }
     }
 }

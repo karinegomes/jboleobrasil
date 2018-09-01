@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Company;
+use App\Models\Motorista;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -24,7 +27,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        //
+        Route::model('company', Company::class);
+        Route::model('motorista', Motorista::class);
 
         parent::boot($router);
     }

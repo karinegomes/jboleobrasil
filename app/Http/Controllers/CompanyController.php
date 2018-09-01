@@ -18,22 +18,13 @@ use App\Utils\StringUtils;
 use Carbon\Carbon;
 
 class CompanyController extends Controller {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index() {
         $companies = Company::all();
 
         return view('company.index', compact('companies'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create() {
 
         $groups = Group::all();
@@ -45,12 +36,6 @@ class CompanyController extends Controller {
         return view('company.add', compact('groups', 'states', 'cities'))->with('codigo', $codigo);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreCompanyRequest $request) {
 
         try {
@@ -68,14 +53,7 @@ class CompanyController extends Controller {
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id) {
-        $company = Company::findOrFail($id);
+    public function show(Company $company) {
         $doctypes = Doctype::all();
 
         $company->load('documents', 'documents.doctype');
@@ -83,14 +61,7 @@ class CompanyController extends Controller {
         return view('company.read', compact('company', 'doctypes'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id) {
-        $company = Company::findOrFail($id);
+    public function edit(Company $company) {
         $groups = Group::all();
         $states = State::all();
         $cities = City::orderBy('name')->get()->groupBy('state_id')->toJson();
@@ -98,16 +69,8 @@ class CompanyController extends Controller {
         return view('company.edit', compact('groups', 'states', 'cities', 'company'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCompanyRequest $request, $id) {
+    public function update(UpdateCompanyRequest $request, Company $company) {
         try {
-            $company = Company::findOrFail($id);
             $address = $company->address;
 
             $addressArr = $request->input('address');
@@ -122,14 +85,8 @@ class CompanyController extends Controller {
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id) {
-        if (Company::destroy($id)) {
+    public function destroy(Company $company) {
+        if ($company->delete()) {
             return 'Ok';
         } else {
             return abort(500);

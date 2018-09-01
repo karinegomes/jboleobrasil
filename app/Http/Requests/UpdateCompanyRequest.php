@@ -21,13 +21,13 @@ class UpdateCompanyRequest extends Request {
      * @return array
      */
     public function rules() {
-        $company_id = $this->route('company');
+        $company = $this->route('company');
 
         return [
-            'company.codigo' => 'required|max:4|unique:companies,codigo,' . $company_id,
+            'company.codigo' => 'required|max:4|unique:companies,codigo,' . $company->id,
             'company.name' => 'required|max:100',
             'company.nome_fantasia' => 'required|max:100',
-            'company.registry' => 'bail|max:25|cnpj|unique:companies,companies.registry,' . $company_id,
+            'company.registry' => 'bail|max:25|cnpj|unique:companies,companies.registry,' . $company->id,
             'company.cpf' => 'max:14|cpf',
             'company.nome_contato' => 'max:100',
             'company.telefone' => 'max:45',
