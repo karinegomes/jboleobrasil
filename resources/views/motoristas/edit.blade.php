@@ -9,7 +9,9 @@
         <div class="col-md-12">
             <section class="tile">
                 <div class="tile-header dvd dvd-btm">
-                    <h1 class="custom-font"><strong>Cadastrar</strong> Motorista</h1>
+                    <h1 class="custom-font">
+                        <strong>{{ $motorista->id ? 'Editar' : 'Cadastrar' }}</strong> Motorista
+                    </h1>
                 </div>
                 <div class="tile-body">
                     <form method="post"

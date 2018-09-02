@@ -34,7 +34,27 @@ class OrdemDeFreteController extends Controller
 
         $ordemFrete->dadosBancarios()->create($request->get('dados_bancarios'));
 
-        return redirect(route('ordens-frete.index'))->with('success', 'A ordem de frete foi cadastrado com sucesso.');
+        return redirect(route('ordens-frete.index'))->with('success', 'A ordem de frete foi cadastrada com sucesso.');
+    }
+
+    public function edit(OrdemDeFrete $ordemFrete)
+    {
+        $motoristas = Motorista::select(['id', 'nome'])->get();
+        $measures = Measure::select(['id', 'name'])->get();
+
+        return view('ordens_frete.edit', compact('ordemFrete', 'motoristas', 'measures'));
+    }
+
+    public function update(OrdemDeFrete $ordemFrete, OrdemDeFreteRequest $request)
+    {
+        $data = $request->all();
+        $data['data_carregamento'] = Carbon::createFromFormat('d/m/Y', $data['data_carregamento'])->format('Y-m-d');
+        $data['previsao_descarga'] = Carbon::createFromFormat('d/m/Y', $data['previsao_descarga'])->format('Y-m-d');
+
+        $ordemFrete->update($data);
+        $ordemFrete->dadosBancarios()->update($request->get('dados_bancarios'));
+
+        return redirect(route('ordens-frete.index'))->with('success', 'A ordem de frete foi atualizada com sucesso.');
     }
 
     public function tableData(Request $request)
