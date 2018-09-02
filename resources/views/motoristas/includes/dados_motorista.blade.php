@@ -11,7 +11,7 @@
         <td>
             <input type="text" class="form-control" value="{{ $motorista->telefone }}" readonly>
         </td>
-        <th scope="row">celular</th>
+        <th scope="row">Celular</th>
         <td>
             <input type="text" class="form-control" value="{{ $motorista->celular }}" readonly>
         </td>
