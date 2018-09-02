@@ -8,6 +8,7 @@ use App\Models\Motorista;
 use App\Models\OrdemDeFrete;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OrdemDeFreteController extends Controller
 {
@@ -60,6 +61,21 @@ class OrdemDeFreteController extends Controller
         $ordemFrete->dadosBancarios()->update($request->get('dados_bancarios'));
 
         return redirect(route('ordens-frete.index'))->with('success', 'A ordem de frete foi atualizada com sucesso.');
+    }
+
+    public function destroy(OrdemDeFrete $ordemFrete)
+    {
+        try {
+            $ordemFrete->delete();
+        } catch (\Exception $e) {
+            Log::debug($e);
+
+            $erro = config('constants.ERRO_PADRAO');
+
+            return redirect(route('ordens-frete.index'))->with('error', $erro.'<br><br>Erro: '.$e->getMessage());
+        }
+
+        return redirect(route('ordens-frete.index'))->with('success', 'A ordem de frete foi removida com sucesso.');
     }
 
     public function tableData(Request $request)
