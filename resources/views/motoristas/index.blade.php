@@ -99,8 +99,6 @@
                     { "data": "tipo_de_caminhao" }
                 ],
                 'fnRowCallback': function(nRow, aData, iDisplayIndex) {
-                    console.log(aData);
-
                     $(nRow).data('id', aData.id);
 
                     $(nRow).on('click', function () {

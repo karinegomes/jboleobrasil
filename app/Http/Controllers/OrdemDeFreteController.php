@@ -9,13 +9,11 @@ use App\Models\OrdemDeFrete;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-
 class OrdemDeFreteController extends Controller
 {
     public function index()
     {
-        return 'test';
+        return view('ordens_frete.index');
     }
 
     public function create()
@@ -37,5 +35,49 @@ class OrdemDeFreteController extends Controller
         $ordemFrete->dadosBancarios()->create($request->get('dados_bancarios'));
 
         return redirect(route('ordens-frete.index'))->with('success', 'A ordem de frete foi cadastrado com sucesso.');
+    }
+
+    public function tableData(Request $request)
+    {
+        $column = $request['order'][0]['column'];
+
+        $ordensFrete = OrdemDeFrete::join('motoristas as m', 'ordens_de_frete.motorista_id', '=', 'm.id')
+            ->join('ordens_de_frete_status as ofs', 'ordens_de_frete.status_id', '=', 'ofs.id')
+            ->limit($request['length'])
+            ->offset($request['start'])
+            ->orderBy($request['columns'][$column]['data'], $request['order'][0]['dir'])
+            ->select([
+                'ordens_de_frete.id',
+                'm.nome as motorista',
+                'data_carregamento',
+                'previsao_descarga',
+                'valor_frete',
+                'cidade_origem',
+                'cidade_destino',
+                'adiantamento',
+                'saldo',
+                'ofs.nome as status',
+            ]);
+
+        $search = $request['search']['value'];
+        $count = OrdemDeFrete::count(['id']);
+
+        if ($search) {
+            $ordensFrete = $ordensFrete->where(function ($query) use ($search) {
+                $query->where('m.nome', 'like', '%'.$search.'%')
+                    ->orWhere('cidade_origem', 'like', '%'.$search.'%')
+                    ->orWhere('cidade_destino', 'like', '%'.$search.'%')
+                    ->orWhere('ofs.nome', 'like', '%'.$search.'%');
+            });
+        }
+
+        $ordensFrete = $ordensFrete->get();
+
+        return response()->json([
+            'data'            => $ordensFrete,
+            'draw'            => intval($request['draw']),
+            'recordsTotal'    => intval($count),
+            'recordsFiltered' => $search ? $ordensFrete->count() : intval($count),
+        ]);
     }
 }
