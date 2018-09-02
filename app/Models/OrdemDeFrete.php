@@ -16,12 +16,16 @@ class OrdemDeFrete extends Model
         'cidade_destino',
         'valor_frete',
         'peso',
+        'measure_id',
         'adiantamento',
         'saldo',
         'data_carregamento',
         'previsao_descarga',
         'motorista_id',
+        'status_id',
     ];
+
+    protected $dates = ['data_carregamento', 'previsao_descarga'];
 
     public function motorista()
     {
@@ -31,5 +35,15 @@ class OrdemDeFrete extends Model
     public function dadosBancarios()
     {
         return $this->morphOne(DadosBancarios::class, 'entity');
+    }
+
+    public function measure()
+    {
+        return $this->belongsTo(Measure::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(OrdemDeFreteStatus::class, 'status_id');
     }
 }

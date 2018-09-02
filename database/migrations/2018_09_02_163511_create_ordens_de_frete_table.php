@@ -18,6 +18,7 @@ class CreateOrdensDeFreteTable extends Migration
             $table->string('cidade_destino');
             $table->decimal('valor_frete');
             $table->decimal('peso');
+            $table->integer('measure_id')->unsigned();
             $table->decimal('adiantamento');
             $table->decimal('saldo');
             $table->date('data_carregamento');
@@ -27,6 +28,7 @@ class CreateOrdensDeFreteTable extends Migration
             $table->softDeletes();
 
             $table->foreign('motorista_id')->references('id')->on('motoristas');
+            $table->foreign('measure_id')->references('id')->on('measures');
         });
     }
 

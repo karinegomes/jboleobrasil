@@ -116,4 +116,11 @@ class MotoristaController extends Controller
             'recordsFiltered' => $search ? $motoristas->count() : intval($count),
         ]);
     }
+
+    public function getDadosBancarios(Motorista $motorista)
+    {
+        $dadosBancarios = $motorista->dadosBancarios;
+
+        return response()->json(compact('dadosBancarios'));
+    }
 }

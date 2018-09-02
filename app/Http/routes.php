@@ -34,6 +34,8 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::resource('motoristas', 'MotoristaController', ['parameters' => ['motoristas' => 'motorista']]);
         Route::get('ajax/motoristas/table-data', 'MotoristaController@tableData');
+        Route::get('ajax/motoristas/{motorista}/dados-bancarios', 'MotoristaController@getDadosBancarios')
+            ->name('ajax.motoristas.dados-bancarios');
         Route::post('motoristas/{motorista}/documents', 'DocumentController@store')->name('motoristas.documents.store');
 
         Route::resource('ordens-frete', 'OrdemDeFreteController', ['parameters' => ['ordens-frete' => 'ordemFrete']]);
