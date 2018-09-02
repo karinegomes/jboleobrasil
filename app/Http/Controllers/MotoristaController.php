@@ -94,13 +94,17 @@ class MotoristaController extends Controller
         $count = Motorista::count(['id']);
 
         if ($search) {
+            $motoristas = $motoristas->leftJoin('ordens_de_frete as of', 'motoristas.id', '=', 'of.motorista_id');
+
             $motoristas = $motoristas->where(function ($query) use ($search) {
                 $query->where('motoristas.nome', 'like', '%'.$search.'%')
                     ->orWhere('motoristas.cpf', 'like', '%'.$search.'%')
                     ->orWhere('motoristas.telefone', 'like', '%'.$search.'%')
                     ->orWhere('motoristas.celular', 'like', '%'.$search.'%')
                     ->orWhere('motoristas.placa', 'like', '%'.$search.'%')
-                    ->orWhere('tc.nome', 'like', '%'.$search.'%'); // TODO: Filtrar por cidade quando ordem de frete estiver pronto
+                    ->orWhere('tc.nome', 'like', '%'.$search.'%')
+                    ->orWhere('of.cidade_origem', 'like', '%'.$search.'%')
+                    ->orWhere('of.cidade_destino', 'like', '%'.$search.'%');
             });
         }
 
