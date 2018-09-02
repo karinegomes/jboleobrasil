@@ -103,13 +103,25 @@ class OrdemDeFreteController extends Controller
         $search = $request['search']['value'];
         $count = OrdemDeFrete::count(['id']);
 
+        if ($request->has('motorista_id')) {
+            $count = OrdemDeFrete::where('motorista_id', $request->get('motorista_id'))->count(['id']);
+            $ordensFrete = $ordensFrete->where('motorista_id', $request->get('motorista_id'));
+        }
+
         if ($search) {
-            $ordensFrete = $ordensFrete->where(function ($query) use ($search) {
-                $query->where('m.nome', 'like', '%'.$search.'%')
-                    ->orWhere('cidade_origem', 'like', '%'.$search.'%')
-                    ->orWhere('cidade_destino', 'like', '%'.$search.'%')
-                    ->orWhere('ofs.nome', 'like', '%'.$search.'%');
-            });
+            if ($request->has('motorista_id')) {
+                $ordensFrete = $ordensFrete->where(function ($query) use ($search) {
+                    $query->where('cidade_origem', 'like', '%'.$search.'%')
+                        ->orWhere('cidade_destino', 'like', '%'.$search.'%');
+                });
+            } else {
+                $ordensFrete = $ordensFrete->where(function ($query) use ($search) {
+                    $query->where('m.nome', 'like', '%'.$search.'%')
+                        ->orWhere('cidade_origem', 'like', '%'.$search.'%')
+                        ->orWhere('cidade_destino', 'like', '%'.$search.'%')
+                        ->orWhere('ofs.nome', 'like', '%'.$search.'%');
+                });
+            }
         }
 
         $ordensFrete = $ordensFrete->get();
