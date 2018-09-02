@@ -46,4 +46,14 @@ class OrdemDeFrete extends Model
     {
         return $this->belongsTo(OrdemDeFreteStatus::class, 'status_id');
     }
+
+    public function getValorAdiantamentoAttribute()
+    {
+        return $this->valor_frete * ($this->adiantamento / 100);
+    }
+
+    public function getValorSaldoAttribute()
+    {
+        return $this->valor_frete * ($this->saldo / 100);
+    }
 }

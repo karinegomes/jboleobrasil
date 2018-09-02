@@ -37,6 +37,11 @@ class OrdemDeFreteController extends Controller
         return redirect(route('ordens-frete.index'))->with('success', 'A ordem de frete foi cadastrada com sucesso.');
     }
 
+    public function show(OrdemDeFrete $ordemFrete)
+    {
+        return view('ordens_frete.show', compact('ordemFrete'));
+    }
+
     public function edit(OrdemDeFrete $ordemFrete)
     {
         $motoristas = Motorista::select(['id', 'nome'])->get();
@@ -99,5 +104,14 @@ class OrdemDeFreteController extends Controller
             'recordsTotal'    => intval($count),
             'recordsFiltered' => $search ? $ordensFrete->count() : intval($count),
         ]);
+    }
+
+    public function finalizar(OrdemDeFrete $ordemFrete)
+    {
+        $ordemFrete->update([
+            'status_id' => 2,
+        ]);
+
+        return redirect(route('ordens-frete.index'))->with('success', 'A ordem de frete foi finalizada com sucesso.');
     }
 }
