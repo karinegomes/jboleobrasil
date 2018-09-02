@@ -106,8 +106,12 @@
                                     </a></li>
                                 <li>
                                     <a href="{{ route('motoristas.index') }}">
-                                        <i class="fa fa-truck"></i>
-                                        <span>Motoristas</span>
+                                        <i class="fa fa-truck"></i> <span>Motoristas</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('ordens-frete.index') }}">
+                                        <i class="fa fa-file-text"></i> <span>Ordens de Frete</span>
                                     </a>
                                 </li>
                                 @if(Auth::user()->isAdmin())

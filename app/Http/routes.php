@@ -36,6 +36,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('ajax/motoristas/table-data', 'MotoristaController@tableData');
         Route::post('motoristas/{motorista}/documents', 'DocumentController@store')->name('motoristas.documents.store');
 
+        Route::resource('ordens-frete', 'OrdemDeFreteController', ['parameters' => ['ordens-frete' => 'ordemFrete']]);
+
         Route::get('appointment/filter', 'AppointmentController@filter');
         Route::post('appointment/view_notification', 'AppointmentController@viewNotification');
 
