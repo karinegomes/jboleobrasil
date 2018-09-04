@@ -96,7 +96,7 @@
     <tr>
         <th scope="row">Agência</th>
         <td><input type="text" class="form-control" value="{{ $ordemFrete->dadosBancarios->agencia }}" readonly></td>
-        <th scope="row">Placa</th>
+        <th scope="row">Conta</th>
         <td><input type="text" class="form-control" value="{{ $ordemFrete->dadosBancarios->conta }}" readonly></td>
     </tr>
     </tbody>
