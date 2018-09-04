@@ -9,6 +9,7 @@ use App\Models\OrdemDeFrete;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use PDF;
 
 class OrdemDeFreteController extends Controller
 {
@@ -141,5 +142,14 @@ class OrdemDeFreteController extends Controller
         ]);
 
         return redirect(route('ordens-frete.index'))->with('success', 'A ordem de frete foi finalizada com sucesso.');
+    }
+
+    public function gerarRelatorio(OrdemDeFrete $ordemFrete)
+    {
+        $pdf = PDF::loadView('ordens_frete.relatorio', compact('ordemFrete'));
+
+        return $pdf->download('Relatorio_OrdemFrete_'.$ordemFrete->id.'.pdf');
+
+        //return view('ordens_frete.relatorio', compact('ordemFrete'));
     }
 }

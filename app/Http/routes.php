@@ -42,6 +42,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('ajax/ordens-frete/table-data', 'OrdemDeFreteController@tableData');
         Route::post('ordens-frete/{ordemFrete}/finalizar', 'OrdemDeFreteController@finalizar')
             ->name('ordens-frete.finalizar');
+        Route::get('ordens-frete/{ordemFrete}/relatorio', 'OrdemDeFreteController@gerarRelatorio')
+            ->name('ordens-frete.relatorio');
 
         Route::get('appointment/filter', 'AppointmentController@filter');
         Route::post('appointment/view_notification', 'AppointmentController@viewNotification');

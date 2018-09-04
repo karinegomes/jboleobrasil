@@ -30,6 +30,11 @@
                         <button class="btn btn-default ordem-frete-del-btn" disabled>
                             <span class="fa fa-times"></span> Apagar
                         </button>
+                        <button class="btn btn-default ordem-frete-btn new-tab"
+                                data-url="{{ route('ordens-frete.relatorio', '__id__') }}"
+                                disabled>
+                            <span class="fa fa-file-pdf-o"></span> Gerar Relatório
+                        </button>
 
                         <form method="POST" action="{{ route('ordens-frete.destroy', '__id__') }}" class="hidden form-excluir-ordem-frete">
                             {{ csrf_field() }}
@@ -161,7 +166,11 @@
                 var id = $('#ordens-frete .selected').data('id');
                 var url = $(this).data('url').replace('__id__', id);
 
-                window.location.href = url;
+                if ($(this).hasClass('new-tab')) {
+                    window.open(url, '_blank');
+                } else {
+                    window.location.href = url;
+                }
             });
 
             $('.ordem-frete-del-btn').on('click', function () {
