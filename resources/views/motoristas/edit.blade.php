@@ -129,6 +129,16 @@
                                            value="{{ old('dados_bancarios.nome_banco', $motorista->id ? $motorista->dadosBancarios->nome_banco : null) }}">
                                 </div>
                             </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="tipo_conta" class="control-label">Tipo de conta</label>
+                                    <select name="dados_bancarios[tipo_conta]" id="tipo_conta" class="form-control">
+                                        <option value="" {{ old('dados_bancarios.tipo_conta', $motorista->id ? $motorista->dadosBancarios->tipo_conta : null) == '' ? 'selected' : '' }}>Selecionar...</option>
+                                        <option value="Conta corrente" {{ old('dados_bancarios.tipo_conta', $motorista->id ? $motorista->dadosBancarios->tipo_conta : null) == 'Conta corrente' ? 'selected' : '' }}>Conta corrente</option>
+                                        <option value="Conta poupança" {{ old('dados_bancarios.tipo_conta', $motorista->id ? $motorista->dadosBancarios->tipo_conta : null) == 'Conta poupança' ? 'selected' : '' }}>Conta poupança</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">

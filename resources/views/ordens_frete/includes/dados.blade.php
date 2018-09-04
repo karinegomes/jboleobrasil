@@ -82,6 +82,8 @@
     <tr>
         <th>Nome do banco</th>
         <td><input type="text" class="form-control" value="{{ $ordemFrete->dadosBancarios->nome_banco }}" readonly></td>
+        <th>Tipo de conta</th>
+        <td><input type="text" class="form-control" value="{{ $ordemFrete->dadosBancarios->tipo_conta }}" readonly></td>
     </tr>
     <tr>
         <th scope="row">Favorecido</th>

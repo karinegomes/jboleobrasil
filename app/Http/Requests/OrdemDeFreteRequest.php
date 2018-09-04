@@ -31,7 +31,7 @@ class OrdemDeFreteRequest extends Request
             'cidade_origem'     => 'cidade de origem',
             'cidade_destino'    => 'cidade de destino',
             'valor_frete'       => 'valor do frete',
-            'measure'           => 'medida',
+            'measure_id'        => 'medida',
             'data_carregamento' => 'data do carregamento',
             'previsao_descarga' => 'previsão de descarga',
             'motorista_id'      => 'motorista',
