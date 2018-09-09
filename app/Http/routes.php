@@ -5,13 +5,19 @@ use App\Models\Order;
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('test', function() {
-        $embarques = \App\Models\Embarque::intervaloDataPagamentoEmbarquesAtivos('2017-03-01', '2017-03-15', 'todos', 'todos');
-    });
-
     //Route::get('pos-venda/{idEmpresa}/controle-pagamento/{min}/{max}', 'PosVendaController@controlePagamento');
 
     Route::group(['middleware' => ['auth', 'ptbr']], function () {
+//        Route::get('test', function () {
+//            Mail::raw('Text to e-mail', function ($message) {
+//                $message->from('jaber@jboleobrasil.com.br', 'Karine');
+//                $message->to('gomes.karine92@gmail.com', 'Karine');
+//                $message->subject('Test');
+//            });
+//
+//            echo 'Email enviado';
+//        });
+
         Route::get('/', 'HomeController@index');
 
         Route::resource('agenda', 'AgendaController', ['only' => ['index', 'show']]);
@@ -32,18 +38,22 @@ Route::group(['middleware' => 'web'], function () {
         Route::resource('pos-venda', 'PosVendaController', ['only' => ['index']]);
         Route::resource('periodo-cobranca', 'PeriodoCobrancaController', ['only' => ['index', 'destroy']]);
 
+        // -------------------- MOTORISTAS --------------------
         Route::resource('motoristas', 'MotoristaController', ['parameters' => ['motoristas' => 'motorista']]);
         Route::get('ajax/motoristas/table-data', 'MotoristaController@tableData');
         Route::get('ajax/motoristas/{motorista}/dados-bancarios', 'MotoristaController@getDadosBancarios')
             ->name('ajax.motoristas.dados-bancarios');
         Route::post('motoristas/{motorista}/documents', 'DocumentController@store')->name('motoristas.documents.store');
 
+        // -------------------- ORDENS DE FRETE --------------------
         Route::resource('ordens-frete', 'OrdemDeFreteController', ['parameters' => ['ordens-frete' => 'ordemFrete']]);
         Route::get('ajax/ordens-frete/table-data', 'OrdemDeFreteController@tableData');
         Route::post('ordens-frete/{ordemFrete}/finalizar', 'OrdemDeFreteController@finalizar')
             ->name('ordens-frete.finalizar');
         Route::get('ordens-frete/{ordemFrete}/relatorio', 'OrdemDeFreteController@gerarRelatorio')
             ->name('ordens-frete.relatorio');
+        Route::post('ordens-frete/{ordemFrete}/enviar-email', 'OrdemDeFreteController@enviarEmail')
+            ->name('ordens-frete.enviar-email');
 
         Route::get('appointment/filter', 'AppointmentController@filter');
         Route::post('appointment/view_notification', 'AppointmentController@viewNotification');

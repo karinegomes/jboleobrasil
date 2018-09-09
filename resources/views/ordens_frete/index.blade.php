@@ -36,6 +36,12 @@
                             <span class="fa fa-file-pdf-o"></span> Gerar Relatório
                         </button>
 
+                        <button class="btn btn-default enviar-email-btn"
+                                data-url="{{ route('ordens-frete.enviar-email', '__id__') }}"
+                                disabled>
+                            <span class="fa fa-envelope"></span> Enviar por E-mail
+                        </button>
+
                         <form method="POST" action="{{ route('ordens-frete.destroy', '__id__') }}" class="hidden form-excluir-ordem-frete">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
@@ -151,12 +157,12 @@
                     $(nRow).on('click', function () {
                         if ($(this).hasClass('selected')) {
                             $(this).removeClass('selected');
-                            $('.ordem-frete-btn, .ordem-frete-del-btn').prop('disabled', true);
+                            $('.ordem-frete-btn, .ordem-frete-del-btn, .enviar-email-btn').prop('disabled', true);
                         }
                         else {
                             table.$('tr.selected').removeClass('selected');
                             $(this).addClass('selected');
-                            $('.ordem-frete-btn, .ordem-frete-del-btn').removeAttr('disabled');
+                            $('.ordem-frete-btn, .ordem-frete-del-btn, .enviar-email-btn').removeAttr('disabled');
                         }
                     });
                 }
@@ -183,6 +189,31 @@
 
                     $form.attr('action', url).submit();
                 }
+            });
+
+            $('.enviar-email-btn').on('click', function () {
+                var email = window.prompt('E-mail:', '');
+                var id = $('#ordens-frete .selected').data('id');
+                var url = $(this).data('url').replace('__id__', id);
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: {
+                        email: email,
+                        _token: $('meta[name="token"]').attr('content')
+                    },
+                    success: function (response) {
+                        var message = response.message;
+
+                        alert(message);
+                    },
+                    error: function (response) {
+                        var error = response.responseJSON['email'][0];
+
+                        alert(error);
+                    }
+                });
             });
         });
     </script>

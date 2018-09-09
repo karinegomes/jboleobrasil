@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrdemDeFreteEmailRequest;
 use App\Http\Requests\OrdemDeFreteRequest;
 use App\Models\Measure;
 use App\Models\Motorista;
 use App\Models\OrdemDeFrete;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use PDF;
 
 class OrdemDeFreteController extends Controller
@@ -151,5 +154,35 @@ class OrdemDeFreteController extends Controller
         return $pdf->download('Relatorio_OrdemFrete_'.$ordemFrete->id.'.pdf');
 
         //return view('ordens_frete.relatorio', compact('ordemFrete'));
+    }
+
+    public function enviarEmail(OrdemDeFrete $ordemFrete, OrdemDeFreteEmailRequest $request)
+    {
+        $email = $request->get('email');
+        $user = auth()->user();
+        $pdf = PDF::loadView('ordens_frete.relatorio', compact('ordemFrete'));
+        $pdfPath = storage_path('temp/Relatorio_OrdemFrete_'.$ordemFrete->id.'.pdf');
+
+        $pdf->save($pdfPath);
+
+        Mail::send('emails.ordem_frete', compact('ordemFrete'), function ($message) use ($user, $email, $ordemFrete, $pdfPath) {
+            $motorista = $ordemFrete->motorista;
+
+            $message->from($user->email, $user->name);
+            $message->to($email);
+            $message->subject('Ordem de Frete');
+
+            foreach ($motorista->documents as $documento) {
+                $path = storage_path("docs/".$motorista->entityType."_{$motorista->id}/{$documento->filename}");
+
+                $message->attach($path);
+            }
+
+            $message->attach($pdfPath);
+        });
+
+        File::delete($pdfPath);
+
+        return response()->json(['message' => 'O e-mail foi enviado com sucesso.']);
     }
 }
