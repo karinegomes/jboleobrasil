@@ -36,7 +36,7 @@
             <button @click="edit" class="btn btn-default" :disabled="!selected || selected.deleted_at">
             <span class="fa fa-pencil"></span> Editar
             </button>
-            <button @click="delete" class="btn btn-default" :disabled="!selected || selected.deleted_at">
+            <button v-if="user_id == 1" @click="delete" class="btn btn-default" :disabled="!selected || selected.deleted_at">
             <span class="fa fa-trash"></span> Apagar
             </button>
           </div>
@@ -94,7 +94,8 @@ new Vue({
       { key: entry => {
           return entry.status[0].toUpperCase() + entry.status.slice(1)
       }, label: 'Status'}
-    ]
+    ],
+    user_id: '{{ $userId }}'
   },
   methods: {
     add: function() {

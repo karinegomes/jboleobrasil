@@ -38,8 +38,9 @@ class OrderController extends Controller
 		//$orders = Order::withTrashed()->get();
         $orders = Order::all();
 		$orders->load('item', 'seller', 'client');
+		$userId = auth()->user()->id;
 
-		return view('order.index', ['orders' => $orders]);
+		return view('order.index', compact('orders', 'userId'));
 	}
 
 	public function create(Request $request)
