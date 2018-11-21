@@ -23,9 +23,29 @@ class EmbarqueController extends Controller
     {
         /*$orders = Order::orderBy('sell_date')->orderBy('reference_code')->get();*/
 
-        $orders = Order::all();
+        /*$orders = Order::limit(10)->get();
 
-        $orders->load('item', 'seller', 'client');
+        $orders->load('item', 'seller', 'client');*/
+
+        $vendedor = '(select name from companies where id = orders.seller_id)';
+        $comprador = '(select name from companies where id = orders.client_id)';
+        $produto = '(select (select name from products where id = items.product_id) from items where id = orders.item_id)';
+        $quantidade = '(select format(amount, 2, "de_DE") from items where id = orders.item_id)';
+        $preco = '(select concat("R$ ", format(price, 2, "de_DE")) from items where id = orders.item_id)';
+        $status = 'CONCAT(UCASE(LEFT(orders.status, 1)), SUBSTRING(orders.status, 2))';
+        $sellDate = 'date_format(orders.sell_date, "%d/%m/%Y")';
+
+        $orders = Order::select([
+                'orders.id',
+                'orders.reference_code',
+                DB::raw($sellDate.' as custom_sell_date'),
+                DB::raw($vendedor.' as vendedor'),
+                DB::raw($comprador.' as comprador'),
+                DB::raw($produto.' as produto'),
+                DB::raw($quantidade.' as quantidade'),
+                DB::raw($preco.' as preco'),
+                DB::raw($status.' as status'),
+            ])->get();
 
         $clientes = Company::all(['id', 'nome_fantasia']);
         $produtos = Product::all(['id', 'name']);

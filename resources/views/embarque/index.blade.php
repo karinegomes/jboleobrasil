@@ -132,23 +132,13 @@
             gridData: {!! $orders !!},
             gridColumns: [
                 { key: 'reference_code', label: 'Número'},
-                { key: entry => {
-                    const date = entry.sell_date;
-
-                    if(date){
-                        return (new Date(date)).toLocaleDateString();
-                    } else {
-                        return null;
-                    }
-                }, label: 'Data'},
-                { key: entry => entry.seller.nome_fantasia, label: 'Vendedor'},
-                { key: entry => entry.client.nome_fantasia, label: 'Comprador'},
-                { key: entry => entry.item.product_name, label: 'Produto'},
-                { key: entry => entry.item.amount, label: 'Quantidade'},
-                { key: entry => `R$ ${entry.item.price}`, label: 'Valor'},
-                { key: entry => {
-                    return entry.status[0].toUpperCase() + entry.status.slice(1)
-                }, label: 'Status'}
+                { key: 'custom_sell_date', label: 'Data'},
+                { key: 'vendedor', label: 'Vendedor'},
+                { key: 'comprdor', label: 'Comprador'},
+                { key: 'produto', label: 'Produto'},
+                { key: 'quantidade', label: 'Quantidade'},
+                { key: 'preco', label: 'Valor'},
+                { key: 'status', label: 'Status'}
             ]
         },
         methods: {
