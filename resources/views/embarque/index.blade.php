@@ -134,7 +134,7 @@
                 { key: 'reference_code', label: 'Número'},
                 { key: 'custom_sell_date', label: 'Data'},
                 { key: 'vendedor', label: 'Vendedor'},
-                { key: 'comprdor', label: 'Comprador'},
+                { key: 'comprador', label: 'Comprador'},
                 { key: 'produto', label: 'Produto'},
                 { key: 'quantidade', label: 'Quantidade'},
                 { key: 'preco', label: 'Valor'},
