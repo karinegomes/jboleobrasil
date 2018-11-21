@@ -25,8 +25,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::resource('item', 'ItemController', ['only' => ['index', 'edit', 'update']]);
         Route::resource('client', 'ClientController', ['except' => ['index', 'show']]);
         Route::resource('interaction', 'InteractionController');
-        Route::resource('order', 'OrderController', ['except' => ['show']]);
         Route::resource('product', 'ProductController');
+
+        Route::resource('order', 'OrderController', ['except' => ['show']]);
+        Route::get('ajax/orders/table-data', 'OrderController@tableData');
 
         Route::resource('company', 'CompanyController');
         Route::post('companies/{company}/documents', 'DocumentController@store')->name('companies.documents.store');
