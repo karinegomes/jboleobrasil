@@ -24,6 +24,12 @@
             <button @click="read" class="btn btn-default" :disabled="!selected">
               <span class="fa fa-search"></span> Visualizar
             </button>
+            <button @click="edit" class="btn btn-default" :disabled="!selected">
+              <span class="fa fa-pencil"></span> Editar
+            </button>
+            <button @click="apagar" class="btn btn-default" :disabled="!selected">
+              <span class="fa fa-times"></span> Apagar
+            </button>
           </div>
           <div class="col-sm-4">
             <form id="search">
@@ -78,6 +84,25 @@ new Vue({
     },
     read: function(){
       location.href = `{{ url('/user') }}/${this.selected.id}`;
+    },
+    edit: function () {
+      location.href = `{{ url('/user') }}/${this.selected.id}/edit`;
+    },
+    apagar: function () {
+      let result = confirm("Deseja realmente apagar esse registro?");
+
+      if(result){
+        $.ajax({
+          url: `{{ url('/user') }}/${this.selected.id}`,
+          data: { _token: '{{ csrf_token() }}' },
+          type: 'DELETE',
+          success: function(result) {
+            if (result.redirectUrl !== undefined) {
+              location.href = result.redirectUrl;
+            }
+          }
+        });
+      }
     }
   }
 });
